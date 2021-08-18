@@ -1,0 +1,98 @@
+# User-specific files
+*.cache
+*.suo
+*.csproj.user
+*.user
+*.userosscache
+*.sln.docstates
+*.rsuser
+
+# Build results
+[Bb]in/
+[Oo]bj/
+BuildLog.txt
+
+# Visual Studio 2015 cache/options directory
+.vs/
+
+# IIS null files
+(null)*
+
+# Visual Studio Code settings
+.vscode/
+
+# ReSharper is a .NET coding add-in
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# NuGet
+# The packages folder can be ignored because of Package Restore
+**/packages/*
+
+# Reports
+CoverageReport.xml
+*TestsResult_*.xml
+TestReport_*.xlsx
+
+# Build tools / dependencies
+cake/*
+!cake/packages.config
+.sonarqube
+
+# Build artifacts
+/artifacts
+/build/environmentsettings.yaml
+/build/environmentsettings.yaml.bak
+/cake_exchange.yml
+
+# Deployment files
+deploy_CH.bat
+deploy_VN.bat
+
+# Configs
+src/WinPresentation/app.config
+src/WindowsServices/XmlInputPreprocessor/App.config
+src/WindowsServices/XmlImport/App.config
+src/WindowsServices/XmlExport/App.config
+src/WindowsServices/StarUpdater/App.config
+src/WindowsServices/StarSteuerpflichten/App.config
+src/WindowsServices/AiaValidation/App.config
+src/VeranaSimulatorWinPresentation/App.config
+src/Tools/Simulator/StarSimulator/StarWebservicesSimulator/Web.config
+src/Tools/Simulator/JustSimulator/JustWebServicesSimulator/Web.config
+src/Tests/WinPresentation.Tests/connections.config
+src/Tests/WinPresentation.Tests/App.config
+src/Tests/Services.Tests/connections.config
+src/Tests/Services.Tests/App.config
+src/Tests/Data.Tests/connections.config
+src/Tests/Data.Tests/App.config
+src/Tests/Business.Tests/connections.config
+src/Tests/Business.Tests/App.config
+src/Services/Web.config
+src/Services/connections.config
+src/Presentation/app.config
+src/ChmBatchRunner/BatchRunner.exe.config
+database/bat/ConfigureParameter.bat
+database/bat/ConfigureParameter.bat.bak
+src/ChmBatchRunner/BatchRunner.exe.config.bak
+src/Presentation/app.config.bak
+src/Services/connections.config.bak
+src/Services/Web.config.bak
+src/Tests/Business.Tests/App.config.bak
+src/Tests/Business.Tests/connections.config.bak
+src/Tests/Data.Tests/App.config.bak
+src/Tests/Data.Tests/connections.config.bak
+src/Tests/Services.Tests/App.config.bak
+src/Tests/Services.Tests/connections.config.bak
+src/Tests/WinPresentation.Tests/App.config.bak
+src/Tests/WinPresentation.Tests/connections.config.bak
+src/Tools/Simulator/StarSimulator/StarWebservicesSimulator/Web.config.bak
+src/VeranaSimulatorWinPresentation/App.config.bak
+src/WindowsServices/AiaValidation/App.config.bak
+src/WindowsServices/StarSteuerpflichten/App.config.bak
+src/WindowsServices/StarUpdater/App.config.bak
+src/WindowsServices/XmlExport/App.config.bak
+src/WindowsServices/XmlImport/App.config.bak
+src/WindowsServices/XmlInputPreprocessor/App.config.bak
+src/WinPresentation/app.config.bak
