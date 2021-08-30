@@ -7,7 +7,7 @@ namespace BookStoreConsole.BookstoreDataAccess
 {
     public class BookstoreDataAccessJsonImpl : IBookstoreDataAccess
     {
-        private string _filePath = "C:\\Users\\DTH\\Documents\\NETFoundation\\BookStoreConsole\\Data\\BooksDataJson.json";
+        private string _filePath = $"{Directory.GetCurrentDirectory()}\\..\\..\\..\\BookStoreConsole\\Data\\BooksDataJson.json";
 
         public List<Book> GetAllBooks()
         {
