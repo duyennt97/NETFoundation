@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Reflection;
 using BookStoreConsole.BookstoreBusiness;
-using BookStoreConsole.BookstoreDataAccess;
 using BookStoreConsole.Data;
 using Ninject;
 
@@ -10,14 +10,9 @@ namespace BookStoreConsole.ConsoleView
     {
         private IBookstoreBusiness _bookstoreBusiness;
 
-        public BookstoreConsole()
+        public BookstoreConsole(IBookstoreBusiness business)
         {
-            var kernal = new StandardKernel();
-            kernal.Bind<IBookstoreBusiness>().To<BookstoreBusinessImpl>().InSingletonScope();  
-            kernal.Bind<IBookstoreDataAccess>().To<BookstoreDataAccessImpl>().InSingletonScope();  
-
-            var bookstoreBusiness = kernal.Get<IBookstoreBusiness>();
-            _bookstoreBusiness = bookstoreBusiness;
+            _bookstoreBusiness = business;
         }
 
         private void ShowOptions()

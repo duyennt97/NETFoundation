@@ -46,13 +46,11 @@ namespace BookStorePresentation
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.m_searchButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.m_changeFormatButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.m_formatLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -247,24 +245,12 @@ namespace BookStorePresentation
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 526F));
-            this.tableLayoutPanel3.Controls.Add(this.m_changeFormatButton, 0, 0);
             this.tableLayoutPanel3.Location = new System.Drawing.Point(9, 363);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(776, 28);
             this.tableLayoutPanel3.TabIndex = 6;
-            // 
-            // m_changeFormatButton
-            // 
-            this.m_changeFormatButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.m_changeFormatButton.Location = new System.Drawing.Point(3, 3);
-            this.m_changeFormatButton.Name = "m_changeFormatButton";
-            this.m_changeFormatButton.Size = new System.Drawing.Size(144, 22);
-            this.m_changeFormatButton.TabIndex = 3;
-            this.m_changeFormatButton.Text = "Change format";
-            this.m_changeFormatButton.UseVisualStyleBackColor = true;
-            this.m_changeFormatButton.Click += new System.EventHandler(this.OnChangeFormatButtonClicked);
             // 
             // label4
             // 
@@ -301,7 +287,6 @@ namespace BookStorePresentation
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -322,7 +307,6 @@ namespace BookStorePresentation
         private System.Windows.Forms.Button m_deleteButton;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.Button m_changeFormatButton;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label m_formatLabel;
         private System.Windows.Forms.DataGridViewTextBoxColumn NameCol;

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 using BookStoreConsole.BookstoreBusiness;
-using BookStoreConsole.BookstoreDataAccess;
 using BookStoreConsole.Data;
 using Ninject;
 
@@ -13,14 +13,13 @@ namespace BookStorePresentation
     {
         private IBookstoreBusiness _bookstoreBusiness;
         private List<Book> _listBook;
-        private bool isUsingText;
         private StandardKernel kernel = new StandardKernel();
 
-        public BookStoreManagerForm()
+        public BookStoreManagerForm(IBookstoreBusiness bookstoreBusiness)
         {
             InitializeComponent();
             dataGridView1.AutoGenerateColumns = false;
-            BindService();
+            _bookstoreBusiness = bookstoreBusiness;
             LoadData();
             m_formatLabel.Text = _bookstoreBusiness.GetCurrentFormat();
         }
@@ -29,15 +28,6 @@ namespace BookStorePresentation
         {
             _listBook = _bookstoreBusiness.GetAllBooks();
             dataGridView1.DataSource = _listBook;
-        }
-
-        private void BindService()
-        {
-            kernel.Bind<IBookstoreBusiness>().To<BookstoreBusinessImpl>().InSingletonScope();  
-            kernel.Bind<IBookstoreDataAccess>().To<BookstoreDataAccessImpl>().InSingletonScope().Named("Text");  
-            kernel.Bind<IBookstoreDataAccess>().To<BookstoreDataAccessJsonImpl>().InSingletonScope().Named("Json");
-            //var bookstoreDa = kernel.Get<IBookstoreDataAccess>("Text");
-            _bookstoreBusiness = kernel.Get<IBookstoreBusiness>();
         }
 
         private void OnNewButtonClicked(object sender, EventArgs e)
@@ -112,13 +102,6 @@ namespace BookStorePresentation
                 MessageBox.Show("Book is deleted.");
             }
             LoadData();
-        }
-
-        private void OnChangeFormatButtonClicked(object sender, EventArgs e)
-        {
-            _bookstoreBusiness.ChangeDataAccessType();
-            LoadData();
-            m_formatLabel.Text = _bookstoreBusiness.GetCurrentFormat();
         }
 
         private void OnSearchButtonClicked(object sender, EventArgs e)

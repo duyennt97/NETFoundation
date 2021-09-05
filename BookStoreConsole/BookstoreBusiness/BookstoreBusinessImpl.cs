@@ -8,18 +8,10 @@ namespace BookStoreConsole.BookstoreBusiness
     public class BookstoreBusinessImpl : IBookstoreBusiness
     {
         private IBookstoreDataAccess _bookstoreDa;
-        private IBookstoreDataAccess[] _listDataAccesses;
 
-        public BookstoreBusinessImpl(IBookstoreDataAccess[] dataAccessList)
+        public BookstoreBusinessImpl(IBookstoreDataAccess dataAccessList)
         {
-            _listDataAccesses = dataAccessList;
-            _bookstoreDa = dataAccessList.First();
-        }
-
-        public void ChangeDataAccessType()
-        {
-            var currentType = _bookstoreDa.GetType();
-            _bookstoreDa = _listDataAccesses.First(d => d.GetType() != currentType);
+            _bookstoreDa = dataAccessList;
         }
 
         public string GetCurrentFormat()

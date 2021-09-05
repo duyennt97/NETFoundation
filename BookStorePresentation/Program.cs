@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
+using BookStoreCommon;
+using BookStoreConsole.BookstoreBusiness;
+using BookStoreConsole.Ninject;
+using Ninject;
 
 namespace BookStorePresentation
 {
@@ -14,7 +18,11 @@ namespace BookStorePresentation
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new BookStoreManagerForm());
+            IoC.Initialize(new StandardKernel(new NinjectSettings() {LoadExtensions =  true}),
+                new ServiceBinding());
+            var bookstoreBusiness = IoC.Get<IBookstoreBusiness>("TEXT");
+            //var bookstoreBusiness = IoC.Get<IBookstoreBusiness>("JSON");
+            Application.Run(new BookStoreManagerForm(bookstoreBusiness));
         }
     }
 }

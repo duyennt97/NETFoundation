@@ -7,7 +7,7 @@ namespace BookStoreConsole.BookstoreDataAccess
 {
     public class BookstoreDataAccessImpl : IBookstoreDataAccess
     {
-        private string _filePath = $"{Directory.GetCurrentDirectory()}\\..\\..\\..\\BookStoreConsole\\Data\\BooksData.txt";
+        private string _filePath = $"{Directory.GetCurrentDirectory()}\\..\\..\\..\\BookStoreDataAccess\\Data\\BooksData.txt";
 
         public List<Book> GetAllBooks()
         {

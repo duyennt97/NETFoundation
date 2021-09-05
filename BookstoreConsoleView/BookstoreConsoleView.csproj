@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D5D701E4-CEC8-4895-B002-2424082E6E9A}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <RootNamespace>BookStoreConsole</RootNamespace>
-    <AssemblyName>BookStoreConsole</AssemblyName>
+    <ProjectGuid>{6F74205B-0985-4909-AB6E-8288824719EE}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>BookstoreConsoleView</RootNamespace>
+    <AssemblyName>BookstoreConsoleView</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -32,13 +32,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="Ninject, Version=4.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.4.0.0-beta-0134\lib\net45\Ninject.dll</HintPath>
     </Reference>
@@ -52,12 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BookstoreBusiness\BookstoreBusinessImpl.cs" />
-    <Compile Include="BookstoreBusiness\IBookstoreBusiness.cs" />
-    <Compile Include="Data\Book.cs" />
-    <Compile Include="BookstoreDataAccess\BookstoreDataAccessJsonImpl.cs" />
-    <Compile Include="BookstoreDataAccess\BookstoreDataAccessImpl.cs" />
-    <Compile Include="BookstoreDataAccess\IBookstoreDataAccess.cs" />
     <Compile Include="ConsoleView\BookstoreConsole.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -67,7 +55,18 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data\BooksData.txt" />
+    <ProjectReference Include="..\BookStoreCommon\BookStoreCommon.csproj">
+      <Project>{25345529-6252-4963-a1a7-765881afafdd}</Project>
+      <Name>BookStoreCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BookStoreConsole\BookStoreBusiness.csproj">
+      <Project>{D5D701E4-CEC8-4895-B002-2424082E6E9A}</Project>
+      <Name>BookStoreBusiness</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BookStoreDataAccess\BookStoreDataAccess.csproj">
+      <Project>{D33500D2-C700-48DB-9AEC-A49C18CAFFF1}</Project>
+      <Name>BookStoreDataAccess</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
