@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BookStoreConsole.BookstoreBusiness;
+﻿using BookstoreBusiness.BookstoreBusiness;
 using BookStoreConsole.BookstoreDataAccess;
 using Ninject.Modules;
 
-namespace BookStoreConsole.Ninject
+namespace BookstoreBusiness.Ninject
 {
     public class ServiceBinding : NinjectModule
     {

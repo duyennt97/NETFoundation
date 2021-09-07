@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BookstoreBusiness.BookstoreBusiness;
+using BookstoreBusiness.Ninject;
 using BookStoreCommon;
-using BookStoreConsole.BookstoreBusiness;
-using BookStoreConsole.ConsoleView;
-using BookStoreConsole.Ninject;
+using BookstoreConsoleView.ConsoleView;
 using Ninject;
 
 namespace BookstoreConsoleView
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             IoC.Initialize(new StandardKernel(new NinjectSettings() {LoadExtensions =  true}),
                 new ServiceBinding());

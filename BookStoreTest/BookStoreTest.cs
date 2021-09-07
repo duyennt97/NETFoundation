@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using BookstoreBusiness.BookstoreBusiness;
+using BookstoreBusiness.Ninject;
 using BookStoreCommon;
-using BookStoreConsole.BookstoreBusiness;
 using BookStoreConsole.BookstoreDataAccess;
 using BookStoreConsole.Data;
-using BookStoreConsole.Ninject;
 using FluentAssertions;
 using Ninject;
 using NSubstitute;

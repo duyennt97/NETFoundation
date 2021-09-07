@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Windows.Forms;
-using BookStoreConsole.BookstoreBusiness;
+using BookstoreBusiness.BookstoreBusiness;
 using BookStoreConsole.Data;
 using Ninject;
 

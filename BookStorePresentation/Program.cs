@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
+using BookstoreBusiness.BookstoreBusiness;
+using BookstoreBusiness.Ninject;
 using BookStoreCommon;
-using BookStoreConsole.BookstoreBusiness;
-using BookStoreConsole.Ninject;
 using Ninject;
 
 namespace BookStorePresentation

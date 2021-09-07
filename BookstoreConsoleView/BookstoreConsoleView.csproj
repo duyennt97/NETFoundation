@@ -55,13 +55,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BookStoreBusiness\BookStoreBusiness.csproj">
+      <Project>{d5d701e4-cec8-4895-b002-2424082e6e9a}</Project>
+      <Name>BookStoreBusiness</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BookStoreCommon\BookStoreCommon.csproj">
       <Project>{25345529-6252-4963-a1a7-765881afafdd}</Project>
       <Name>BookStoreCommon</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BookStoreConsole\BookStoreBusiness.csproj">
-      <Project>{D5D701E4-CEC8-4895-B002-2424082E6E9A}</Project>
-      <Name>BookStoreBusiness</Name>
     </ProjectReference>
     <ProjectReference Include="..\BookStoreDataAccess\BookStoreDataAccess.csproj">
       <Project>{D33500D2-C700-48DB-9AEC-A49C18CAFFF1}</Project>

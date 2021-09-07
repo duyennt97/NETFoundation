@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Reflection;
-using BookStoreConsole.BookstoreBusiness;
+using BookstoreBusiness.BookstoreBusiness;
 using BookStoreConsole.Data;
-using Ninject;
 
-namespace BookStoreConsole.ConsoleView
+namespace BookstoreConsoleView.ConsoleView
 {
     class BookstoreConsole
     {

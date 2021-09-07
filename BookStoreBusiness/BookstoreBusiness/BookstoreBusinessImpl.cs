@@ -4,7 +4,7 @@ using System.Linq;
 using BookStoreConsole.BookstoreDataAccess;
 using BookStoreConsole.Data;
 
-namespace BookStoreConsole.BookstoreBusiness
+namespace BookstoreBusiness.BookstoreBusiness
 {
     public class BookstoreBusinessImpl : IBookstoreBusiness
     {

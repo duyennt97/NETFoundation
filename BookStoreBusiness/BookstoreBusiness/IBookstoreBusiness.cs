@@ -2,7 +2,7 @@
 using BookStoreConsole.BookstoreDataAccess;
 using BookStoreConsole.Data;
 
-namespace BookStoreConsole.BookstoreBusiness
+namespace BookstoreBusiness.BookstoreBusiness
 {
     public interface IBookstoreBusiness
     {

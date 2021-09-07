@@ -104,13 +104,13 @@
     <Content Include="xunit.runner.visualstudio.testadapter.dll" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BookStoreBusiness\BookStoreBusiness.csproj">
+      <Project>{d5d701e4-cec8-4895-b002-2424082e6e9a}</Project>
+      <Name>BookStoreBusiness</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BookStoreCommon\BookStoreCommon.csproj">
       <Project>{25345529-6252-4963-a1a7-765881afafdd}</Project>
       <Name>BookStoreCommon</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BookStoreConsole\BookStoreBusiness.csproj">
-      <Project>{d5d701e4-cec8-4895-b002-2424082e6e9a}</Project>
-      <Name>BookStoreBusiness</Name>
     </ProjectReference>
     <ProjectReference Include="..\BookStoreDataAccess\BookStoreDataAccess.csproj">
       <Project>{d33500d2-c700-48db-9aec-a49c18cafff1}</Project>

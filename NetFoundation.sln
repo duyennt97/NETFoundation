@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Linq", "Linq\Linq.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStorePresentation", "BookStorePresentation\BookStorePresentation.csproj", "{5813A017-B010-44CB-A412-C669AC260541}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStoreBusiness", "BookStoreConsole\BookStoreBusiness.csproj", "{D5D701E4-CEC8-4895-B002-2424082E6E9A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStoreBusiness", "BookStoreBusiness\BookStoreBusiness.csproj", "{D5D701E4-CEC8-4895-B002-2424082E6E9A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookstoreConsoleView", "BookstoreConsoleView\BookstoreConsoleView.csproj", "{6F74205B-0985-4909-AB6E-8288824719EE}"
 EndProject
