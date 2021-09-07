@@ -9,6 +9,11 @@ namespace BookStoreConsole.BookstoreDataAccess
     {
         private string _filePath = $"{Directory.GetCurrentDirectory()}\\..\\..\\..\\BookStoreDataAccess\\Data\\BooksDataJson.json";
 
+        public void SetDataFile(string filePath)
+        {
+            _filePath = filePath;
+        }
+
         public List<Book> GetAllBooks()
         {
             string json = File.ReadAllText(_filePath);

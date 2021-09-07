@@ -9,6 +9,11 @@ namespace BookStoreConsole.BookstoreDataAccess
     {
         private string _filePath = $"{Directory.GetCurrentDirectory()}\\..\\..\\..\\BookStoreDataAccess\\Data\\BooksData.txt";
 
+        public void SetDataFile(string filePath)
+        {
+            _filePath = filePath;
+        }
+
         public List<Book> GetAllBooks()
         {
             var result = new List<Book>();
