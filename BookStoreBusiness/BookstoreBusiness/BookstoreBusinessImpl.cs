@@ -34,11 +34,6 @@ namespace BookstoreBusiness.BookstoreBusiness
                  (!year.HasValue || b.PublishYear == year.Value))).ToList();
         }
 
-        public void SetDataInterface(IBookstoreDataAccess dataAccessService)
-        {
-            _bookstoreDa = dataAccessService;
-        }
-
         public List<Book> GetAllBooks()
         {
             return _bookstoreDa.GetAllBooks();

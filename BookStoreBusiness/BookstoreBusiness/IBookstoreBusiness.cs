@@ -12,6 +12,5 @@ namespace BookstoreBusiness.BookstoreBusiness
         bool DeleteBook(int bookId);
         string GetCurrentFormat();
         List<Book> SearchBook(string bookName, string author, int? year);
-        void SetDataInterface(IBookstoreDataAccess dataAccessService);
     }
 }

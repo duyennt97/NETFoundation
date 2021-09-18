@@ -2,93 +2,83 @@
 using System.Collections.Generic;
 using System.Linq;
 using BookstoreBusiness.BookstoreBusiness;
-using BookstoreBusiness.Ninject;
-using BookStoreCommon;
 using BookStoreConsole.BookstoreDataAccess;
 using BookStoreConsole.Data;
 using FluentAssertions;
 using Ninject;
 using NSubstitute;
 using NUnit.Framework;
-
 namespace BookStoreTest
 {
     [TestFixture]
     public class BookStoreTest
     {
+
         private IBookstoreBusiness _bookstoreBusiness;
         private IBookstoreDataAccess _mockBookstoreDataAccess;
-
-        private List<Book> _listTestBooks;
-
-        [OneTimeSetUp]
-        public void InitBinding()
-        {
-            IoC.Initialize(new StandardKernel(new NinjectSettings() {LoadExtensions =  true}),
-                new ServiceBinding());
-            _bookstoreBusiness = IoC.Get<IBookstoreBusiness>("TEXT");
-        }
 
         [SetUp]
         public void InitTest()
         {
-            ResetListBook();
-            _mockBookstoreDataAccess = GetMockBookstoreDa();
-            _bookstoreBusiness.SetDataInterface(_mockBookstoreDataAccess);
+            var testKernel = new StandardKernel();
+            testKernel.Bind<IBookstoreBusiness>().To<BookstoreBusinessImpl>();
+            _mockBookstoreDataAccess = GetMockBookstoreDa(_listTestBooks);
+            testKernel.Bind<IBookstoreDataAccess>().ToConstant(_mockBookstoreDataAccess);
+            _bookstoreBusiness = testKernel.Get<IBookstoreBusiness>();
+
         }
 
-        public void ResetListBook()
+        private readonly List<Book> _listTestBooks = new List<Book>()
         {
-            _listTestBooks = new List<Book>()
+            new Book()
             {
-                new Book()
-                {
-                    Id = 1,
-                    Author = "Author 1",
-                    Name = "Name 1",
-                    PublishYear = 2021
-                },
-                new Book()
-                {
-                    Id = 2,
-                    Author = "Author 2",
-                    Name = "Name 2",
-                    PublishYear = 2020
-                },
-                new Book()
-                {
-                    Id = 3,
-                    Author = "Author 3",
-                    Name = "Name 3",
-                    PublishYear = 2020
-                }
-            };
-        }
+                Id = 1,
+                Author = "Author 1",
+                Name = "Name 1",
+                PublishYear = 2021
+            },
+            new Book()
+            {
+                Id = 2,
+                Author = "Author 2",
+                Name = "Name 2",
+                PublishYear = 2020
+            },
+            new Book()
+            {
+                Id = 3,
+                Author = "Author 3",
+                Name = "Name 3",
+                PublishYear = 2020
+            }
+        };
+      
 
-        private IBookstoreDataAccess GetMockBookstoreDa()
+        private IBookstoreDataAccess GetMockBookstoreDa(List<Book> listTestBook)
         {
+            var listBook = new List<Book>(listTestBook);
             var bookstoreDa = Substitute.For<IBookstoreDataAccess>();
 
-            bookstoreDa.GetAllBooks().Returns(_listTestBooks);
+            bookstoreDa.GetAllBooks().Returns(listBook);
 
-            bookstoreDa.InsertBook(Arg.Do<Book>(x => _listTestBooks.Add(x)))
+            bookstoreDa.InsertBook(Arg.Do<Book>(x => listBook.Add(x)))
                 .Returns(true);
 
-            bookstoreDa.SaveBookList(Arg.Do<List<Book>>(x => _listTestBooks = x))
+            bookstoreDa.SaveBookList(Arg.Do<List<Book>>(x => listBook = x))
                 .Returns(true);
 
             return bookstoreDa;
         }
 
         [Test]
-        public void GetAllBookTest()
+        public void Test_GetAllBook_Success()
         {
             var allBook = _bookstoreBusiness.GetAllBooks();
             allBook.ShouldBeEquivalentTo(_listTestBooks);
         }
 
         [Test]
-        public void InsertBookTest()
+        public void Test_InsertBook_Success()
         {
             var insertBook = new Book()
             {
@@ -102,11 +92,11 @@ namespace BookStoreTest
             var listBookAfterInsert = _bookstoreBusiness.GetAllBooks();
 
             insertResult.Should().BeTrue();
-            listBookAfterInsert.Count.Should().Be(listBook.Count + 1);
+            listBookAfterInsert.Should().HaveCount(listBook.Count + 1);
         }
 
         [Test]
-        public void UpdateBookSuccessTest()
+        public void Test_UpdateBook_Success()
         {
             string newName = "Updated book name";
             var listBook = _bookstoreBusiness.GetAllBooks();
@@ -121,7 +111,7 @@ namespace BookStoreTest
         }
 
         [Test]
-        public void UpdateBookNotAvailableTest()
+        public void Test_UpdateBook_ThrowException()
         {
             var newBook = new Book()
             {
@@ -134,7 +124,7 @@ namespace BookStoreTest
         }
 
         [Test]
-        public void DeleteBookSuccessTest()
+        public void Test_DeleteBook_Success()
         {
             var listBook = _bookstoreBusiness.GetAllBooks().ToList();
             var deleteBook = listBook[0];
@@ -150,7 +140,7 @@ namespace BookStoreTest
         }
 
         [Test]
-        public void DeleteBookNotAvailableTest()
+        public void Test_DeleteBook_ThrowException()
         {
             var newBook = new Book()
             {
@@ -164,7 +154,7 @@ namespace BookStoreTest
         }
 
         [Test]
-        public void SearchBookByNameTest()
+        public void Test_SearchBook_ByName_Success()
         {
             var books= _bookstoreBusiness.SearchBook("Name 1", string.Empty, null);
             books.Should().ContainSingle();
@@ -174,7 +164,7 @@ namespace BookStoreTest
         }
 
         [Test]
-        public void SearchBookByYearTest()
+        public void Test_SearchBook_ByYear_Success()
         {
             var books= _bookstoreBusiness.SearchBook(string.Empty, string.Empty, 2020);
             books.Should().HaveCount(2);
@@ -182,7 +172,7 @@ namespace BookStoreTest
         }
 
         [Test]
-        public void SearchBookComplexTest()
+        public void Test_SearchBook_Complex_Success()
         {
             var books= _bookstoreBusiness.SearchBook("Name 2", "Author 2", 2020);
 

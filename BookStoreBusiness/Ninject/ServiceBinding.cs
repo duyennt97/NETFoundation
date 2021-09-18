@@ -10,8 +10,8 @@ namespace BookstoreBusiness.Ninject
         {
             Bind<IBookstoreBusiness>().To<BookstoreBusinessImpl>().Named("TEXT");
             Bind<IBookstoreBusiness>().To<BookstoreBusinessImpl>().Named("JSON");
-            Bind<IBookstoreDataAccess>().To<BookstoreDataAccessImpl>().WhenAnyAnchestorNamed("TEXT");
-            Bind<IBookstoreDataAccess>().To<BookstoreDataAccessJsonImpl>().WhenAnyAnchestorNamed("JSON");
+            Bind<IBookstoreDataAccess>().To<BookstoreDataAccessImpl>().WhenAnyAncestorNamed("TEXT");
+            Bind<IBookstoreDataAccess>().To<BookstoreDataAccessJsonImpl>().WhenAnyAncestorNamed("JSON");
         }
     }
 }
