@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using BookStoreBusiness;
 using BookstoreBusiness.BookstoreBusiness;
-using BookStoreConsole.Data;
+using BookStoreCommon;
+using BookStoreConsole.Exception;
 using Ninject;
 
 namespace BookStorePresentation
@@ -11,8 +13,7 @@ namespace BookStorePresentation
     public partial class BookStoreManagerForm : Form
     {
         private IBookstoreBusiness _bookstoreBusiness;
-        private List<Book> _listBook;
-        private StandardKernel kernel = new StandardKernel();
+        private List<BookEntity> _listBook;
 
         public BookStoreManagerForm(IBookstoreBusiness bookstoreBusiness)
         {
@@ -49,7 +50,7 @@ namespace BookStorePresentation
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                var selectedBook = (Book) dataGridView1.SelectedRows[0].DataBoundItem;
+                var selectedBook = (BookEntity) dataGridView1.SelectedRows[0].DataBoundItem;
                 m_nameTextBox.Text = selectedBook.Name;
                 m_authorTextBox.Text = selectedBook.Author;
                 m_publishYearTextBox.Text = selectedBook.PublishYear.ToString();
@@ -60,22 +61,30 @@ namespace BookStorePresentation
         {
             if (m_newButton.Enabled)
             {
-                var selectedBook = (Book) dataGridView1.SelectedRows[0].DataBoundItem;
-                var updatedBook = new Book()
+                var selectedBook = (BookEntity) dataGridView1.SelectedRows[0].DataBoundItem;
+                var updatedBook = new BookEntity()
                 {
                     Id = selectedBook.Id,
                     Name = m_nameTextBox.Text,
                     Author = m_authorTextBox.Text,
                     PublishYear = Convert.ToInt32(m_publishYearTextBox.Text)
                 };
-                if (_bookstoreBusiness.UpdateBook(updatedBook))
+                try
                 {
-                    MessageBox.Show("Book is updated.");
+                    if (_bookstoreBusiness.UpdateBook(updatedBook))
+                    {
+                        MessageBox.Show("Book is updated.");
+                    }
+                }
+                catch (BookNotFoundException ex)
+                {
+                    LogService.Log.Error(ex.Message);
+                    MessageBox.Show(ex.Message);
                 }
             }
             else
             {
-                var newBook = new Book()
+                var newBook = new BookEntity()
                 {
                     Name = m_nameTextBox.Text,
                     Author = m_authorTextBox.Text,
@@ -95,11 +104,20 @@ namespace BookStorePresentation
 
         private void OnDeleteButtonClicked(object sender, EventArgs e)
         {
-            var selectedBook = (Book) dataGridView1.SelectedRows[0].DataBoundItem;
-            if (_bookstoreBusiness.DeleteBook(selectedBook.Id))
+            var selectedBook = (BookEntity) dataGridView1.SelectedRows[0].DataBoundItem;
+            try
             {
-                MessageBox.Show("Book is deleted.");
+                if (_bookstoreBusiness.DeleteBook(selectedBook.Id))
+                {
+                    MessageBox.Show("Book is deleted.");
+                }
             }
+            catch (BookNotFoundException ex)
+            {
+                LogService.Log.Error(ex.Message);
+                MessageBox.Show(ex.Message);
+            }
+           
             LoadData();
         }
 

@@ -1,6 +1,8 @@
 ﻿using System;
+using BookStoreBusiness;
 using BookstoreBusiness.BookstoreBusiness;
-using BookStoreConsole.Data;
+using BookStoreCommon;
+using BookStoreConsole.Exception;
 
 namespace BookstoreConsoleView.ConsoleView
 {
@@ -24,6 +26,7 @@ namespace BookstoreConsoleView.ConsoleView
             Console.WriteLine("----");
             Console.WriteLine("0/ Exit");
             Console.WriteLine("Enter action number:");
+
         }
 
         public void Process(int option)
@@ -58,11 +61,20 @@ namespace BookstoreConsoleView.ConsoleView
             DisplayAllBooks();
             Console.WriteLine("Enter book's ID to delete:");
             var id = Convert.ToInt32(Console.ReadLine());
-            var result = _bookstoreBusiness.DeleteBook(id);
-            if (result)
+            try
             {
-                Console.WriteLine("Book is deleted");
+                var result = _bookstoreBusiness.DeleteBook(id);
+                if (result)
+                {
+                    Console.WriteLine("Book is deleted");
+                }
             }
+            catch (BookNotFoundException ex)
+            {
+                LogService.Log.Error(ex.Message);
+                Console.WriteLine(ex.Message);
+            }
+            
         }
 
         private void UpdateBook()
@@ -76,19 +88,30 @@ namespace BookstoreConsoleView.ConsoleView
             var author = Console.ReadLine();
             Console.WriteLine("Enter book's publish year:");
             var year = Convert.ToInt32(Console.ReadLine());
-
-            var result = _bookstoreBusiness.UpdateBook(new Book()
+            Console.WriteLine("Enter book's price:");
+            var price = Convert.ToInt32(Console.ReadLine());
+            try
             {
-                Id = id,
-                Name = name,
-                Author = author,
-                PublishYear = year
-            });
+                var result = _bookstoreBusiness.UpdateBook(new BookEntity()
+                {
+                    Id = id,
+                    Name = name,
+                    Author = author,
+                    PublishYear = year,
+                    Price = price
+                });
 
-            if (result)
-            {
-                Console.WriteLine("Book is updated.");
+                if (result)
+                {
+                    Console.WriteLine("Book is updated.");
+                }
             }
+            catch (BookNotFoundException ex)
+            {
+                LogService.Log.Error(ex.Message);
+                Console.WriteLine(ex.Message);
+            }
+            
         }
 
         private void InsertBook()
@@ -99,12 +122,15 @@ namespace BookstoreConsoleView.ConsoleView
            var author = Console.ReadLine();
            Console.WriteLine("Enter book's publish year:");
            var year = Convert.ToInt32(Console.ReadLine());
+           Console.WriteLine("Enter book's price:");
+           var price = Convert.ToInt32(Console.ReadLine());
 
-           var result = _bookstoreBusiness.InsertBook(new Book()
+           var result = _bookstoreBusiness.InsertBook(new BookEntity()
            {
                Name = name,
                Author = author,
-               PublishYear = year
+               PublishYear = year,
+               Price = price
            });
            if (result)
            {
@@ -120,7 +146,7 @@ namespace BookstoreConsoleView.ConsoleView
             
             foreach (var b in books)
             {
-                Console.WriteLine($"Book {b.Id}:\n\tName: {b.Name}\n\tAuthor: {b.Author}\n\tYear:{b.PublishYear}\n");
+                Console.WriteLine($"Book {b.Id}:\n\tName: {b.Name}\n\tAuthor: {b.Author}\n\tYear:{b.PublishYear}\n\tPrice:{b.Price}");
             }
         }
 

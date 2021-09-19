@@ -1,1 +1,44 @@
-[{"Id":1,"Name":"In Search of Lost Time","Author":"Marcel Proust","PublishYear":1913},{"Id":2,"Name":"Don Quixote","Author":"Miguel de Cervantes","PublishYear":1615},{"Id":3,"Name":"Hamlet","Author":"William Shakespeare","PublishYear":1599},{"Id":4,"Name":"The Adventures of Huckleberry Finn","Author":"Mark Twain","PublishYear":1888},{"Id":5,"Name":"test","Author":"abc","PublishYear":1234},{"Id":0,"Name":"Json Book","Author":"Elca","PublishYear":2021}]
+[
+  {
+    "Id": 1,
+    "Name": "In Search of Lost Time",
+    "Author": "Marcel Proust",
+    "PublishYear": 1913,
+    "Price":  1200 
+  },
+  {
+    "Id": 2,
+    "Name": "Don Quixote",
+    "Author": "Miguel de Cervantes",
+    "PublishYear": 1615,
+    "Price": 90
+  },
+  {
+    "Id": 3,
+    "Name": "Hamlet",
+    "Author": "William Shakespeare",
+    "PublishYear": 1599,
+    "Price": 1600
+  },
+  {
+    "Id": 4,
+    "Name": "The Adventures of Huckleberry Finn",
+    "Author": "Mark Twain",
+    "PublishYear": 1888,
+    "Price": 200
+  },
+  {
+    "Id": 5,
+    "Name": "test",
+    "Author": "abc",
+    "PublishYear": 1234,
+    "Price": 30
+  },
+  {
+    "Id": 0,
+    "Name": "Json Book",
+    "Author": "Elca",
+    "PublishYear": 2021,
+    "Price": 320
+  }
+]

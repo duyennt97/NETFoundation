@@ -30,9 +30,6 @@ namespace BookStorePresentation
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.NameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AuthorCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PublishYearCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.m_publishYearTextBox = new System.Windows.Forms.TextBox();
             this.m_authorTextBox = new System.Windows.Forms.TextBox();
@@ -48,6 +45,11 @@ namespace BookStorePresentation
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
             this.m_formatLabel = new System.Windows.Forms.Label();
+            this.NameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AuthorCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PublishYearCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PriceCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PriceCatCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -65,7 +67,9 @@ namespace BookStorePresentation
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.NameCol,
             this.AuthorCol,
-            this.PublishYearCol});
+            this.PublishYearCol,
+            this.PriceCol,
+            this.PriceCatCol});
             this.dataGridView1.Location = new System.Drawing.Point(12, 44);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
@@ -75,30 +79,6 @@ namespace BookStorePresentation
             this.dataGridView1.Size = new System.Drawing.Size(776, 195);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.OnSelectedRowChanged);
-            // 
-            // NameCol
-            // 
-            this.NameCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.NameCol.DataPropertyName = "Name";
-            this.NameCol.HeaderText = "Name";
-            this.NameCol.Name = "NameCol";
-            this.NameCol.ReadOnly = true;
-            // 
-            // AuthorCol
-            // 
-            this.AuthorCol.DataPropertyName = "Author";
-            this.AuthorCol.HeaderText = "Author";
-            this.AuthorCol.Name = "AuthorCol";
-            this.AuthorCol.ReadOnly = true;
-            this.AuthorCol.Width = 200;
-            // 
-            // PublishYearCol
-            // 
-            this.PublishYearCol.DataPropertyName = "Publishyear";
-            this.PublishYearCol.HeaderText = "Publish year";
-            this.PublishYearCol.Name = "PublishYearCol";
-            this.PublishYearCol.ReadOnly = true;
-            this.PublishYearCol.Width = 150;
             // 
             // tableLayoutPanel1
             // 
@@ -270,6 +250,44 @@ namespace BookStorePresentation
             this.m_formatLabel.TabIndex = 8;
             this.m_formatLabel.Text = "format";
             // 
+            // NameCol
+            // 
+            this.NameCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NameCol.DataPropertyName = "Name";
+            this.NameCol.HeaderText = "Name";
+            this.NameCol.Name = "NameCol";
+            this.NameCol.ReadOnly = true;
+            // 
+            // AuthorCol
+            // 
+            this.AuthorCol.DataPropertyName = "Author";
+            this.AuthorCol.HeaderText = "Author";
+            this.AuthorCol.Name = "AuthorCol";
+            this.AuthorCol.ReadOnly = true;
+            this.AuthorCol.Width = 200;
+            // 
+            // PublishYearCol
+            // 
+            this.PublishYearCol.DataPropertyName = "Publishyear";
+            this.PublishYearCol.HeaderText = "Publish year";
+            this.PublishYearCol.Name = "PublishYearCol";
+            this.PublishYearCol.ReadOnly = true;
+            this.PublishYearCol.Width = 150;
+            // 
+            // PriceCol
+            // 
+            this.PriceCol.DataPropertyName = "Price";
+            this.PriceCol.HeaderText = "Price";
+            this.PriceCol.Name = "PriceCol";
+            this.PriceCol.ReadOnly = true;
+            // 
+            // PriceCatCol
+            // 
+            this.PriceCatCol.DataPropertyName = "BookCategory";
+            this.PriceCatCol.HeaderText = "BookCategory";
+            this.PriceCatCol.Name = "PriceCatCol";
+            this.PriceCatCol.ReadOnly = true;
+            // 
             // BookStoreManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -309,10 +327,12 @@ namespace BookStorePresentation
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label m_formatLabel;
+        private System.Windows.Forms.Button m_searchButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn NameCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn AuthorCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn PublishYearCol;
-        private System.Windows.Forms.Button m_searchButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PriceCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PriceCatCol;
     }
 }
 

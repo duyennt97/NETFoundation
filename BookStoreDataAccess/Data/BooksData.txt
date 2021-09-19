@@ -1,5 +1,8 @@
-In Search of Lost Time;Marcel Proust;1913
-Don Quixote;Miguel de Cervantes;1615
-Hamlet;William Shakespeare;1599
-The Adventures of Huckleberry Finn;Mark Twain;1888
-test;abc;1234
+In Search of Lost Time;Marcel Proust;1913;1200
+Don Quixote;Miguel de Cervantes;1615;500
+Hamlet;William Shakespeare;1599;80
+The Adventures of Huckleberry Finn;Mark Twain;199;2000
+test;abc;1234;600
+Hello;Me;2021;1500
+New book;Abcd;2021;392
+Siang Pure;Zab Zeed;2023;210

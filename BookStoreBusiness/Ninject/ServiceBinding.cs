@@ -1,5 +1,6 @@
 ﻿using BookstoreBusiness.BookstoreBusiness;
 using BookStoreConsole.BookstoreDataAccess;
+using BookStoreDataAccess.BookstoreDataAccess;
 using Ninject.Modules;
 
 namespace BookstoreBusiness.Ninject

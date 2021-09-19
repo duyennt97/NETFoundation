@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using BookStoreConsole.Data;
+using BookStoreDataAccess;
 
 namespace BookStoreConsole.BookstoreDataAccess
 {

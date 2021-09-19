@@ -1,16 +1,15 @@
 ﻿using System.Collections.Generic;
-using BookStoreConsole.BookstoreDataAccess;
-using BookStoreConsole.Data;
+using BookStoreBusiness;
 
 namespace BookstoreBusiness.BookstoreBusiness
 {
     public interface IBookstoreBusiness
     {
-        List<Book> GetAllBooks();
-        bool InsertBook(Book book);
-        bool UpdateBook(Book book);
+        List<BookEntity> GetAllBooks();
+        bool InsertBook(BookEntity book);
+        bool UpdateBook(BookEntity book);
         bool DeleteBook(int bookId);
         string GetCurrentFormat();
-        List<Book> SearchBook(string bookName, string author, int? year);
+        List<BookEntity> SearchBook(string bookName, string author, int? year);
     }
 }

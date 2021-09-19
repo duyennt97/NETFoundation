@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using BookStoreBusiness;
 using BookstoreBusiness.BookstoreBusiness;
 using BookStoreConsole.BookstoreDataAccess;
-using BookStoreConsole.Data;
+using BookStoreConsole.Exception;
+using BookStoreDataAccess;
 using FluentAssertions;
 using Ninject;
 using NSubstitute;
@@ -35,21 +37,21 @@ namespace BookStoreTest
                 Id = 1,
                 Author = "Author 1",
                 Name = "Name 1",
-                PublishYear = 2021
+                PublishYear = "2021"
             },
             new Book()
             {
                 Id = 2,
                 Author = "Author 2",
                 Name = "Name 2",
-                PublishYear = 2020
+                PublishYear = "2020"
             },
             new Book()
             {
                 Id = 3,
                 Author = "Author 3",
                 Name = "Name 3",
-                PublishYear = 2020
+                PublishYear = "2020"
             }
         };
       
@@ -80,11 +82,12 @@ namespace BookStoreTest
         [Test]
         public void Test_InsertBook_Success()
         {
-            var insertBook = new Book()
+            var insertBook = new BookEntity()
             {
                 Author = "Test insert",
                 Name = "Test name",
-                PublishYear = 1999
+                PublishYear = 1999,
+                Price = 180
             };
 
             var listBook = _bookstoreBusiness.GetAllBooks().ToList();
@@ -113,14 +116,15 @@ namespace BookStoreTest
         [Test]
         public void Test_UpdateBook_ThrowException()
         {
-            var newBook = new Book()
+            var newBook = new BookEntity()
             {
                 Author = "Test author",
                 Name = "Test name",
-                PublishYear = 2000
+                PublishYear = 2000,
+                Price = 200
             };
             Action action = () => _bookstoreBusiness.UpdateBook(newBook);
-            action.ShouldThrow<ArgumentException>("Can't find book to update");
+            action.ShouldThrow<BookNotFoundException>("Can't find book to update");
         }
 
         [Test]
@@ -142,15 +146,12 @@ namespace BookStoreTest
         [Test]
         public void Test_DeleteBook_ThrowException()
         {
-            var newBook = new Book()
+            var newBook = new BookEntity()
             {
-                Id = 4,
-                Author = "Test author",
-                Name = "Test name",
-                PublishYear = 2000
+                Id = 4
             };
             Action action = () => _bookstoreBusiness.DeleteBook(newBook.Id);
-            action.ShouldThrow<ArgumentException>("Can't find book to delete");
+            action.ShouldThrow<BookNotFoundException>("Can't find book to delete");
         }
 
         [Test]

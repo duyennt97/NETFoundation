@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using BookStoreConsole.Data;
+using BookStoreCommon;
+using BookStoreConsole.BookstoreDataAccess;
 
-namespace BookStoreConsole.BookstoreDataAccess
+namespace BookStoreDataAccess.BookstoreDataAccess
 {
     public class BookstoreDataAccessImpl : IBookstoreDataAccess
     {
@@ -16,6 +17,7 @@ namespace BookStoreConsole.BookstoreDataAccess
 
         public List<Book> GetAllBooks()
         {
+            LogService.LogCurrentMethod();
             var result = new List<Book>();
             using (var reader = new StreamReader(_filePath))
             {
@@ -30,7 +32,8 @@ namespace BookStoreConsole.BookstoreDataAccess
                             Id = result.Count + 1,
                             Name = bookInfo[0],
                             Author = bookInfo[1],
-                            PublishYear = Convert.ToInt32(bookInfo[2])
+                            PublishYear = bookInfo[2],
+                            Price = bookInfo[3]
                         };
                         result.Add(book);
                     }
@@ -42,11 +45,12 @@ namespace BookStoreConsole.BookstoreDataAccess
 
         public bool SaveBookList(List<Book> books)
         {
+            LogService.LogCurrentMethod();
             using (var writer = new StreamWriter(_filePath))
             {
                 foreach (var book in books)
                 {
-                    writer.WriteLine($"{book.Name};{book.Author};{book.PublishYear}");
+                    writer.WriteLine($"{book.Name};{book.Author};{book.PublishYear};{book.Price}");
                 }
             }
 
@@ -55,9 +59,10 @@ namespace BookStoreConsole.BookstoreDataAccess
 
         public bool InsertBook(Book book)
         {
+            LogService.LogCurrentMethod();
             using (StreamWriter writer = File.AppendText(_filePath))
             {
-                writer.Write($"\n{book.Name};{book.Author};{book.PublishYear}");
+                writer.Write($"\r\n{book.Name};{book.Author};{book.PublishYear};{book.Price}");
             }
 
             return true;

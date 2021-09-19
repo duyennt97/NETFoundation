@@ -1,8 +1,14 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
+using BookStoreBusiness;
+using BookStoreCommon;
 using BookStoreConsole.BookstoreDataAccess;
-using BookStoreConsole.Data;
+using BookStoreConsole.Exception;
+using BookStoreDataAccess;
+using BookStoreDataAccess.BookstoreDataAccess;
 
 namespace BookstoreBusiness.BookstoreBusiness
 {
@@ -10,9 +16,13 @@ namespace BookstoreBusiness.BookstoreBusiness
     {
         public IBookstoreDataAccess _bookstoreDa { get; set; }
 
-        public BookstoreBusinessImpl(IBookstoreDataAccess dataAccessList)
+        public IMapper _bookMapper;
+
+        public BookstoreBusinessImpl(IBookstoreDataAccess dataAccessList, IMapper mapper)
         {
             _bookstoreDa = dataAccessList;
+            _bookMapper = mapper;
+
         }
 
         public string GetCurrentFormat()
@@ -25,49 +35,53 @@ namespace BookstoreBusiness.BookstoreBusiness
             return "Json";
         }
 
-        public List<Book> SearchBook(string bookName, string author, int? year)
+        public List<BookEntity> SearchBook(string bookName, string author, int? year)
         {
             var allBook = _bookstoreDa.GetAllBooks();
-            return allBook.Where(b =>
+            var allBookEntities = _bookMapper.Map<List<Book>, List<BookEntity>>(allBook);
+            return allBookEntities.Where(b =>
                 ((string.IsNullOrEmpty(bookName) || b.Name == bookName) &&
                  (string.IsNullOrEmpty(author) || b.Author == author) &&
                  (!year.HasValue || b.PublishYear == year.Value))).ToList();
         }
 
-        public List<Book> GetAllBooks()
+        public List<BookEntity> GetAllBooks()
         {
-            return _bookstoreDa.GetAllBooks();
+            return  _bookMapper.Map<List<Book>, List<BookEntity>>(_bookstoreDa.GetAllBooks());
         }
 
-        public bool InsertBook(Book book)
+        public bool InsertBook(BookEntity book)
         {
-            return _bookstoreDa.InsertBook(book);
+            return _bookstoreDa.InsertBook(_bookMapper.Map<BookEntity, Book>(book));
         }
 
-        public bool UpdateBook(Book book)
+        public bool UpdateBook(BookEntity book)
         {
-            var bookList = _bookstoreDa.GetAllBooks();
+            var bookList = GetAllBooks();
             var bookToUpdate = bookList.FirstOrDefault(b => b.Id == book.Id);
             if (bookToUpdate == null)
             {
-                throw new ArgumentException("Can't find book to update");
+                throw new BookNotFoundException("Can't find book to update");
             }
             bookList[bookList.IndexOf(bookToUpdate)] = book;
-            return _bookstoreDa.SaveBookList(bookList);
+            return SaveBookList(bookList);
         }
 
         public bool DeleteBook(int bookId)
         {
-            var bookList = _bookstoreDa.GetAllBooks();
+            var bookList = GetAllBooks();
             var deletedBook = bookList.FirstOrDefault(b => b.Id == bookId);
             if (deletedBook == null)
             {
-                throw new ArgumentException("Can't find book to delete");
+                throw new BookNotFoundException("Can't find book to delete");
             }
             bookList.Remove(deletedBook);
-            return _bookstoreDa.SaveBookList(bookList);
+            return SaveBookList(bookList);
         }
 
-
+        private bool SaveBookList(List<BookEntity> listBook)
+        {
+            return  _bookstoreDa.SaveBookList(_bookMapper.Map<List<BookEntity>, List<Book>>(listBook));
+        }
     }
 }
