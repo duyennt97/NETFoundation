@@ -4,5 +4,4 @@ Hamlet;William Shakespeare;1599;80
 The Adventures of Huckleberry Finn;Mark Twain;199;2000
 test;abc;1234;600
 Hello;Me;2021;1500
-New book;Abcd;2021;392
 Siang Pure;Zab Zeed;2023;210
