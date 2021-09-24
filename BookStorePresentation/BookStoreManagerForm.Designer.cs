@@ -50,6 +50,8 @@ namespace BookStorePresentation
             this.PublishYearCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PriceCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PriceCatCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label5 = new System.Windows.Forms.Label();
+            this.m_priceTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -82,19 +84,23 @@ namespace BookStorePresentation
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 6;
+            this.tableLayoutPanel1.ColumnCount = 8;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
             this.tableLayoutPanel1.Controls.Add(this.m_publishYearTextBox, 5, 0);
             this.tableLayoutPanel1.Controls.Add(this.m_authorTextBox, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.label3, 4, 0);
             this.tableLayoutPanel1.Controls.Add(this.m_nameTextBox, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label5, 6, 0);
+            this.tableLayoutPanel1.Controls.Add(this.m_priceTextBox, 7, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 260);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
@@ -105,18 +111,18 @@ namespace BookStorePresentation
             // m_publishYearTextBox
             // 
             this.m_publishYearTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.m_publishYearTextBox.Location = new System.Drawing.Point(663, 4);
+            this.m_publishYearTextBox.Location = new System.Drawing.Point(527, 4);
             this.m_publishYearTextBox.Name = "m_publishYearTextBox";
-            this.m_publishYearTextBox.Size = new System.Drawing.Size(110, 20);
+            this.m_publishYearTextBox.Size = new System.Drawing.Size(75, 20);
             this.m_publishYearTextBox.TabIndex = 5;
             this.m_publishYearTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnPublishYearKeyPressed);
             // 
             // m_authorTextBox
             // 
             this.m_authorTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.m_authorTextBox.Location = new System.Drawing.Point(411, 4);
+            this.m_authorTextBox.Location = new System.Drawing.Point(326, 4);
             this.m_authorTextBox.Name = "m_authorTextBox";
-            this.m_authorTextBox.Size = new System.Drawing.Size(142, 20);
+            this.m_authorTextBox.Size = new System.Drawing.Size(115, 20);
             this.m_authorTextBox.TabIndex = 4;
             // 
             // label1
@@ -133,7 +139,7 @@ namespace BookStorePresentation
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(351, 8);
+            this.label2.Location = new System.Drawing.Point(266, 8);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(38, 13);
             this.label2.TabIndex = 1;
@@ -143,7 +149,7 @@ namespace BookStorePresentation
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(583, 8);
+            this.label3.Location = new System.Drawing.Point(447, 8);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(64, 13);
             this.label3.TabIndex = 2;
@@ -154,7 +160,7 @@ namespace BookStorePresentation
             this.m_nameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.m_nameTextBox.Location = new System.Drawing.Point(63, 4);
             this.m_nameTextBox.Name = "m_nameTextBox";
-            this.m_nameTextBox.Size = new System.Drawing.Size(271, 20);
+            this.m_nameTextBox.Size = new System.Drawing.Size(197, 20);
             this.m_nameTextBox.TabIndex = 3;
             // 
             // m_newButton
@@ -288,6 +294,24 @@ namespace BookStorePresentation
             this.PriceCatCol.Name = "PriceCatCol";
             this.PriceCatCol.ReadOnly = true;
             // 
+            // label5
+            // 
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(608, 8);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(31, 13);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "Price";
+            // 
+            // m_priceTextBox
+            // 
+            this.m_priceTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.m_priceTextBox.Location = new System.Drawing.Point(658, 4);
+            this.m_priceTextBox.Name = "m_priceTextBox";
+            this.m_priceTextBox.Size = new System.Drawing.Size(115, 20);
+            this.m_priceTextBox.TabIndex = 7;
+            // 
             // BookStoreManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -333,6 +357,8 @@ namespace BookStorePresentation
         private System.Windows.Forms.DataGridViewTextBoxColumn PublishYearCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn PriceCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn PriceCatCol;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox m_priceTextBox;
     }
 }
 

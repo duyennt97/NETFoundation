@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 using BookStoreBusiness;
 using BookstoreBusiness.BookstoreBusiness;
 using BookStoreCommon;
 using BookStoreConsole.Exception;
-using Ninject;
 
 namespace BookStorePresentation
 {
@@ -67,7 +65,8 @@ namespace BookStorePresentation
                     Id = selectedBook.Id,
                     Name = m_nameTextBox.Text,
                     Author = m_authorTextBox.Text,
-                    PublishYear = Convert.ToInt32(m_publishYearTextBox.Text)
+                    PublishYear = Convert.ToInt32(m_publishYearTextBox.Text),
+                    Price = Convert.ToInt32(m_priceTextBox.Text)
                 };
                 try
                 {
@@ -88,7 +87,8 @@ namespace BookStorePresentation
                 {
                     Name = m_nameTextBox.Text,
                     Author = m_authorTextBox.Text,
-                    PublishYear = Convert.ToInt32(m_publishYearTextBox.Text)
+                    PublishYear = Convert.ToInt32(m_publishYearTextBox.Text),
+                    Price = Convert.ToInt32(m_priceTextBox.Text)
                 };
                 if (_bookstoreBusiness.InsertBook(newBook))
                 {
@@ -123,12 +123,10 @@ namespace BookStorePresentation
 
         private void OnSearchButtonClicked(object sender, EventArgs e)
         {
-            var filterList = _listBook
-                .Where(s => (s.Name == m_nameTextBox.Text || string.IsNullOrEmpty(m_nameTextBox.Text))
-                            && (s.Author == m_authorTextBox.Text || string.IsNullOrEmpty(m_authorTextBox.Text))
-                            && (s.PublishYear.ToString() == m_publishYearTextBox.Text || string.IsNullOrEmpty(m_publishYearTextBox.Text)))
-                            .ToList();
-            _listBook = filterList;
+            int? year = string.IsNullOrWhiteSpace(m_publishYearTextBox.Text)
+                ? (int?)null
+                : Convert.ToInt32(m_publishYearTextBox.Text);
+            _listBook = _bookstoreBusiness.SearchBook(m_nameTextBox.Text, m_authorTextBox.Text, year);
             dataGridView1.DataSource = _listBook;
         }
     }

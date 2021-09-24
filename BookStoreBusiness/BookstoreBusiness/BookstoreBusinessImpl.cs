@@ -1,10 +1,7 @@
-﻿using System;
-using System.CodeDom.Compiler;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using BookStoreBusiness;
-using BookStoreCommon;
 using BookStoreConsole.BookstoreDataAccess;
 using BookStoreConsole.Exception;
 using BookStoreDataAccess;
@@ -61,7 +58,7 @@ namespace BookstoreBusiness.BookstoreBusiness
             var bookToUpdate = bookList.FirstOrDefault(b => b.Id == book.Id);
             if (bookToUpdate == null)
             {
-                throw new BookNotFoundException("Can't find book to update");
+                throw new BookNotFoundException($"Can't find book to update. Book ID = {book.Id}");
             }
             bookList[bookList.IndexOf(bookToUpdate)] = book;
             return SaveBookList(bookList);
@@ -73,7 +70,7 @@ namespace BookstoreBusiness.BookstoreBusiness
             var deletedBook = bookList.FirstOrDefault(b => b.Id == bookId);
             if (deletedBook == null)
             {
-                throw new BookNotFoundException("Can't find book to delete");
+                throw new BookNotFoundException($"Can't find book to delete. Book ID = {bookId}");
             }
             bookList.Remove(deletedBook);
             return SaveBookList(bookList);

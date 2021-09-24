@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using BookStoreCommon;
 using BookStoreConsole.BookstoreDataAccess;
@@ -9,11 +8,6 @@ namespace BookStoreDataAccess.BookstoreDataAccess
     public class BookstoreDataAccessImpl : IBookstoreDataAccess
     {
         private string _filePath = $"{Directory.GetCurrentDirectory()}\\..\\..\\..\\BookStoreDataAccess\\Data\\BooksData.txt";
-
-        public void SetDataFile(string filePath)
-        {
-            _filePath = filePath;
-        }
 
         public List<Book> GetAllBooks()
         {
@@ -60,9 +54,9 @@ namespace BookStoreDataAccess.BookstoreDataAccess
         public bool InsertBook(Book book)
         {
             LogService.LogCurrentMethod();
-            using (StreamWriter writer = File.AppendText(_filePath))
+            using (StreamWriter writer = new StreamWriter(_filePath, append: true))
             {
-                writer.Write($"\r\n{book.Name};{book.Author};{book.PublishYear};{book.Price}");
+                writer.Write($"\n{book.Name};{book.Author};{book.PublishYear};{book.Price}");
             }
 
             return true;

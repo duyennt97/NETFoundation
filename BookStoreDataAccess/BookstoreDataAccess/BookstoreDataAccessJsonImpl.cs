@@ -1,18 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using BookStoreDataAccess;
+using BookStoreConsole.BookstoreDataAccess;
 using Newtonsoft.Json;
 
-namespace BookStoreConsole.BookstoreDataAccess
+namespace BookStoreDataAccess.BookstoreDataAccess
 {
     public class BookstoreDataAccessJsonImpl : IBookstoreDataAccess
     {
         private string _filePath = $"{Directory.GetCurrentDirectory()}\\..\\..\\..\\BookStoreDataAccess\\Data\\BooksDataJson.json";
-
-        public void SetDataFile(string filePath)
-        {
-            _filePath = filePath;
-        }
 
         public List<Book> GetAllBooks()
         {
