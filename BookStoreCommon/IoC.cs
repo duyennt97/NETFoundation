@@ -1,6 +1,7 @@
 ﻿using Ninject;
 using Ninject.Modules;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace BookStoreCommon
@@ -19,9 +20,24 @@ namespace BookStoreCommon
             return _kernel.Get<T>(name);
         }
 
+        public static T TryGet<T>()
+        {
+            return _kernel.TryGet<T>();
+        }
+
         public static object Get(Type type)
         {
             return _kernel.Get(type);
+        }
+
+        public static object TryGet(Type type)
+        {
+            return _kernel.TryGet(type);
+        }
+
+        public static IEnumerable<object> GetAll(Type type)
+        {
+            return _kernel.GetAll(type);
         }
 
         public static void Initialize(StandardKernel kernel, params INinjectModule[] modules)
@@ -35,6 +51,20 @@ namespace BookStoreCommon
             {
                 kernel.Load(modules);
             }
+        }
+
+        public static void ReInitialize(IKernel kernel, params INinjectModule[] modules)
+        {
+            _kernel = kernel;
+            if (modules != null && modules.Any())
+            {
+                kernel.Load(modules);
+            }
+        }
+
+        public static void Clear()
+        {
+            _kernel = null;
         }
     }
 }

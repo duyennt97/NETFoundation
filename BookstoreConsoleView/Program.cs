@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using BookstoreBusiness.BookstoreBusiness;
+﻿using BookstoreBusiness.BookstoreBusiness;
 using BookstoreBusiness.Ninject;
 using BookStoreCommon;
 using BookStoreConsole.Mapper;

@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using BookStoreBusiness;
 using BookstoreBusiness.BookstoreBusiness;
+using BookStoreCommon;
 using BookStoreConsole.BookstoreDataAccess;
 using BookStoreConsole.Exception;
+using BookStoreConsole.Mapper;
 using BookStoreDataAccess;
+using BookstoreTest.Ninject;
 using FluentAssertions;
 using Ninject;
 using NSubstitute;
@@ -17,45 +20,22 @@ namespace BookStoreTest
     {
 
         private IBookstoreBusiness _bookstoreBusiness;
-        private IBookstoreDataAccess _mockBookstoreDataAccess;
 
         [SetUp]
         public void InitTest()
         {
-            var testKernel = new StandardKernel();
-            testKernel.Bind<IBookstoreBusiness>().To<BookstoreBusinessImpl>();
-            _mockBookstoreDataAccess = GetMockBookstoreDa(_listTestBooks);
-            testKernel.Bind<IBookstoreDataAccess>().ToConstant(_mockBookstoreDataAccess);
-            _bookstoreBusiness = testKernel.Get<IBookstoreBusiness>();
-
+            IoC.Initialize(new StandardKernel(new NinjectSettings() {LoadExtensions =  true}),
+                new TestServiceBinding(),
+                new BookAutoMapperModule());
+            _bookstoreBusiness = IoC.Get<IBookstoreBusiness>();
         }
 
-        private readonly List<Book> _listTestBooks = new List<Book>()
+        [TearDown]
+        public void ClearIoc()
         {
-            new Book()
-            {
-                Id = 1,
-                Author = "Author 1",
-                Name = "Name 1",
-                PublishYear = "2021"
-            },
-            new Book()
-            {
-                Id = 2,
-                Author = "Author 2",
-                Name = "Name 2",
-                PublishYear = "2020"
-            },
-            new Book()
-            {
-                Id = 3,
-                Author = "Author 3",
-                Name = "Name 3",
-                PublishYear = "2020"
-            }
-        };
-      
-
+            IoC.Clear();
+        }
+        
         private IBookstoreDataAccess GetMockBookstoreDa(List<Book> listTestBook)
         {
             var listBook = new List<Book>(listTestBook);
@@ -76,7 +56,36 @@ namespace BookStoreTest
         public void Test_GetAllBook_Success()
         {
             var allBook = _bookstoreBusiness.GetAllBooks();
-            allBook.ShouldBeEquivalentTo(_listTestBooks);
+            allBook.ShouldBeEquivalentTo(new List<BookEntity>
+            {
+                new BookEntity()
+                {
+                    Id = 1,
+                    Author = "Author 1",
+                    Name = "Name 1",
+                    PublishYear = 2021,
+                    Price = 80,
+                    BookCategory = PriceCategory.Cheap
+                },
+                new BookEntity()
+                {
+                    Id = 2,
+                    Author = "Author 2",
+                    Name = "Name 2",
+                    PublishYear = 2020,
+                    Price = 1800,
+                    BookCategory = PriceCategory.Expensive
+                },
+                new BookEntity()
+                {
+                    Id = 3,
+                    Author = "Author 3",
+                    Name = "Name 3",
+                    PublishYear = 2020,
+                    Price = 800,
+                    BookCategory = PriceCategory.Normal
+                }
+            });
         }
 
         [Test]
@@ -90,7 +99,7 @@ namespace BookStoreTest
                 Price = 180
             };
 
-            var listBook = _bookstoreBusiness.GetAllBooks().ToList();
+            var listBook = _bookstoreBusiness.GetAllBooks();
             var insertResult = _bookstoreBusiness.InsertBook(insertBook);
             var listBookAfterInsert = _bookstoreBusiness.GetAllBooks();
 
@@ -130,14 +139,14 @@ namespace BookStoreTest
         [Test]
         public void Test_DeleteBook_Success()
         {
-            var listBook = _bookstoreBusiness.GetAllBooks().ToList();
+            var listBook = _bookstoreBusiness.GetAllBooks();
             var deleteBook = listBook[0];
             var deleteResult = _bookstoreBusiness.DeleteBook(deleteBook.Id);
 
             var listBookAfterDelete = _bookstoreBusiness.GetAllBooks();
 
             deleteResult.Should().BeTrue();
-            listBookAfterDelete.Should().HaveCount(listBook.Count - 1);
+            listBookAfterDelete.Should().HaveCount(2);
 
             var deletedBook = listBookAfterDelete.FirstOrDefault(x => x.Id == deleteBook.Id);
             deletedBook.Should().BeNull();
