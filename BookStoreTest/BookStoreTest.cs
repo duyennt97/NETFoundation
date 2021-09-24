@@ -4,14 +4,11 @@ using System.Linq;
 using BookStoreBusiness;
 using BookstoreBusiness.BookstoreBusiness;
 using BookStoreCommon;
-using BookStoreConsole.BookstoreDataAccess;
 using BookStoreConsole.Exception;
 using BookStoreConsole.Mapper;
-using BookStoreDataAccess;
 using BookstoreTest.Ninject;
 using FluentAssertions;
 using Ninject;
-using NSubstitute;
 using NUnit.Framework;
 namespace BookStoreTest
 {
@@ -36,22 +33,6 @@ namespace BookStoreTest
             IoC.Clear();
         }
         
-        private IBookstoreDataAccess GetMockBookstoreDa(List<Book> listTestBook)
-        {
-            var listBook = new List<Book>(listTestBook);
-            var bookstoreDa = Substitute.For<IBookstoreDataAccess>();
-
-            bookstoreDa.GetAllBooks().Returns(listBook);
-
-            bookstoreDa.InsertBook(Arg.Do<Book>(x => listBook.Add(x)))
-                .Returns(true);
-
-            bookstoreDa.SaveBookList(Arg.Do<List<Book>>(x => listBook = x))
-                .Returns(true);
-
-            return bookstoreDa;
-        }
-
         [Test]
         public void Test_GetAllBook_Success()
         {
